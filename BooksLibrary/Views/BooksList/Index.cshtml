@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "BooksList";
+    var books = ViewData["Books"] as List<BooksLibrary.Data.Models.Book>;
+}
+
+<table class="table table-striped">
+    <colgroup>
+        <col span="1" style="width: 3%;" />
+        <col span="1" style="width: 10%;" />
+        <col span="1" style="width: 10%;" />
+        <col span="1" style="width: 10%;" />
+        <col span="1" style="width: 52%;" />
+        <col span="1" style="width: 15%;" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Release date</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int i = 1; }
+        @foreach (var book in books)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.ReleaseDate</td>
+                <td>@book.Description</td>
+                <td>
+                    <div class="row">
+                        <a asp-controller="BooksList" asp-action="Reserve" asp-route-id="@book.Id" role="button" class="btn btn-primary mr-1" title="Reserve"><i class="fas fa-book"></i></a>
+                        <a asp-controller="BooksList" asp-action="Edit" asp-route-id="@book.Id" role="button" class="btn btn-warning mr-1" title="Edit"><i class="fas fa-edit"></i></a>
+                        <a asp-controller="BooksList" asp-action="Delete" asp-route-id="@book.Id" role="button" class="btn btn-danger mr-1" title="Delete"><i class="fas fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+<a asp-controller="BooksList" asp-action="Create" role="button" class="btn btn-success">Add new book</a>
+

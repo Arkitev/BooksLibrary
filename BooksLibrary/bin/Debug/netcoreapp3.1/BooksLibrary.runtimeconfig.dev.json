@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Arkitev\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Arkitev\\.nuget\\packages"
+    ]
+  }
+}
