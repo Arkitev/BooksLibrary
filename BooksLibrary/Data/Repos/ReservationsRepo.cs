@@ -23,5 +23,23 @@ namespace BooksLibrary.Data.Repos
             reservation.Owner == ownerId)
                 .ToListAsync();
         }
+
+        public async Task<List<Reservation>> GetBookReservations(Guid bookId)
+        {
+            return await _context.Set<Reservation>().Where(reservation =>
+            reservation.Book == bookId)
+                .ToListAsync();
+        }
+
+        public async Task<Reservation> DeleteUserReservation(Guid bookId, string ownerId)
+        {
+            var userReservations = await GetUserReservations(ownerId);
+            Reservation userReservation = userReservations.FirstOrDefault(userReservation => userReservation.Book == bookId);
+
+            _context.Set<Reservation>().Remove(userReservation);
+            await _context.SaveChangesAsync();
+
+            return userReservation;
+        }
     }
 }

@@ -3,43 +3,52 @@
     var books = ViewData["Books"] as List<BooksLibrary.Data.Models.Book>;
 }
 
-<table class="table table-striped">
-    <colgroup>
-        <col span="1" style="width: 3%;" />
-        <col span="1" style="width: 10%;" />
-        <col span="1" style="width: 10%;" />
-        <col span="1" style="width: 10%;" />
-        <col span="1" style="width: 57%;" />
-        <col span="1" style="width: 10%;" />
-    </colgroup>
-    <thead>
-        <tr>
-            <th>No.</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Release date</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{ int i = 1; }
-        @foreach (var book in books)
-        {
+@if (User.Identity.IsAuthenticated)
+{
+    <table class="table table-striped">
+        <colgroup>
+            <col span="1" style="width: 3%;" />
+            <col span="1" style="width: 10%;" />
+            <col span="1" style="width: 10%;" />
+            <col span="1" style="width: 10%;" />
+            <col span="1" style="width: 57%;" />
+            <col span="1" style="width: 10%;" />
+        </colgroup>
+        <thead>
             <tr>
-                <th scope="row">@i</th>
-                <td>@book.Title</td>
-                <td>@book.Author</td>
-                <td>@book.ReleaseDate</td>
-                <td>@book.Description</td>
-                <td>
-                    <div class="row">
-                        <a asp-controller="Home" asp-action="Return" asp-route-id="@book.Id" role="button" class="btn btn-primary mr-1" title="Return"><i class="fas fa-exchange-alt"></i></a>
-                    </div>
-                </td>
+                <th>No.</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Release date</th>
+                <th>Description</th>
+                <th>Actions</th>
             </tr>
-            i++;
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @{ int i = 1; }
+            @foreach (var book in books)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.ReleaseDate</td>
+                    <td>@book.Description</td>
+                    <td>
+                        <div class="row">
+                            <a asp-controller="Home" asp-action="Unbook" asp-route-id="@book.Id" role="button" class="btn btn-primary mr-1" title="Unbook"><i class="fas fa-exchange-alt"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+} 
+else
+{
+    <h3 class="text-danger">Log in to reserve books!</h3>
+}
+
+
 

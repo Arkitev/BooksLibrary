@@ -165,3 +165,4 @@ C:\Users\Arkitev\Desktop\Projects\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp
 C:\Users\Arkitev\Desktop\Projects\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp3.1\Razor\Views\BooksList\Index.cshtml.g.cs
 C:\Users\Arkitev\Desktop\Projects\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp3.1\Razor\Views\BooksList\Create.cshtml.g.cs
 C:\Users\Arkitev\Desktop\Projects\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp3.1\Razor\Views\BooksList\Edit.cshtml.g.cs
+C:\Users\Arkitev\Desktop\Projects\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp3.1\Razor\Views\BooksList\Reservations.cshtml.g.cs

@@ -16,16 +16,26 @@ namespace BooksLibrary.Data
             BooksRepo booksRepo = new BooksRepo(context);
             List<Book> books = await booksRepo.GetAll();
 
-
-            foreach (var book in GetBooks())
+            foreach (var newBook in GetBooks())
             {
-                if (!books.Contains(book))
+                foreach (var book in books)
                 {
-                    await booksRepo.Add(book);
-                }  
+                    if ((newBook.Title == book.Title &&
+                        newBook.Author == book.Author &&
+                        newBook.ReleaseDate == book.ReleaseDate &&
+                        newBook.Description == book.Description))
+                    {
+                        goto OuterLoop;
+                    }
+                }
+
+                await booksRepo.Add(newBook);
+
+                OuterLoop:
+                    continue;
             }
         }
-
+   
         private static List<Book> GetBooks()
         {
             return new List<Book>()

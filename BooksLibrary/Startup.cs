@@ -70,7 +70,7 @@ namespace BooksLibrary
                 endpoints.MapRazorPages();
             });
 
-            //MockBooks.InitDB(context).Wait();
+            MockBooks.InitDB(context).Wait();
         }
     }
 }

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BooksLibrary.Controllers
@@ -40,6 +39,20 @@ namespace BooksLibrary.Controllers
             ViewData["Books"] = userBooks;
 
             return View();
+        }
+
+        public async Task<IActionResult> Unbook(Guid id)
+        {
+            try
+            {
+                await _reservationsRepo.DeleteUserReservation(id, _userManager.GetUserId(User));
+            }
+            catch 
+            {
+
+            }
+
+            return RedirectToAction("Index", "BooksList");
         }
 
         public IActionResult Privacy()

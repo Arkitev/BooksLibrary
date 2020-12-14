@@ -44,6 +44,28 @@ namespace BooksLibrary.Controllers
             } 
         }
 
+        public async Task<ActionResult> Reservations(Guid id)
+        {
+            var selectedBook = await _booksRepo.Get(id);
+            var bookReservations = await _reservationsRepo.GetBookReservations(id);
+            List<ReservationModel> bookReservationsModel = new List<ReservationModel>();
+            
+            foreach (var reservation in bookReservations)
+            {
+                var owner = await _userManager.FindByIdAsync(reservation.Owner);
+                bookReservationsModel.Add(new ReservationModel()
+                {
+                    BookTitle = selectedBook.Title,
+                    Owner = owner.UserName,
+                    Date = reservation.Date
+                });
+            }
+
+            ViewData["BookReservations"] = bookReservationsModel;
+
+            return View(selectedBook);
+        }
+
         public async Task<ActionResult> Reserve(Guid id)
         {
             try
@@ -88,6 +110,7 @@ namespace BooksLibrary.Controllers
                     ReleaseDate = Convert.ToDateTime(form["ReleaseDate"]),
                     Description = form["Description"]
                 });
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -99,6 +122,7 @@ namespace BooksLibrary.Controllers
         public async Task<ActionResult> Edit(Guid id)
         {
             var book = await _booksRepo.Get(id);
+
             return View(book);
         }
 
